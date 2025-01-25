@@ -8,15 +8,13 @@ function sendMessage() {
   const message = userInput.value.trim();
   if (!message) return;
 
-  // عرض رسالة المستخدم في واجهة الشات
   addMessageToChat("user", message);
 
-  // إرسال الرسالة إلى الذكاء الاصطناعي والحصول على الرد
   getAIResponse(message).then(response => {
     addMessageToChat("bot", response);
   });
 
-  userInput.value = ""; // مسح حقل الإدخال
+  userInput.value = "";
 }
 
 function addMessageToChat(sender, message) {
@@ -24,11 +22,10 @@ function addMessageToChat(sender, message) {
   msgDiv.classList.add(sender === "user" ? "user-message" : "bot-message");
   msgDiv.textContent = message;
   chatBox.appendChild(msgDiv);
-  chatBox.scrollTop = chatBox.scrollHeight; // التمرير إلى آخر الرسائل
+  chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 async function getAIResponse(message) {
-  // استبدل YOUR_API_KEY بمفتاح OpenAI الخاص بك
   const apiKey = "YOUR_API_KEY";
 
   try {
@@ -48,7 +45,6 @@ async function getAIResponse(message) {
     return data.choices[0].text.trim();
   } catch (error) {
     console.error("Error:", error);
-    return "حدث خطأ في الاتصال بالذكاء الاصطناعي.";
+    return "An error occurred while connecting to AI.";
   }
 }
-
